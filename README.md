@@ -247,22 +247,6 @@ npm run build
 
 ---
 
-## Contribution & License
-
-This repository is a final project / learning demo. Contributions are welcome for learning purposes — open an issue or PR and wait for maintainer review.
-
-Licensed under MIT (see `LICENSE` if present).
-
----
-
-## Recommended next steps
-
-- Fix the `python-dotenv` typo in `backend/requirements.txt`.
-- Add Dockerfiles and `docker-compose.yml` to orchestrate MySQL + backend + frontend for local dev.
-- Add backend unit/integration tests and CI (GitHub Actions).
-
----
-
 ## Contact
 
 Project owner: `fredxotic` (GitHub)
