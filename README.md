@@ -5,7 +5,6 @@ One-stop admin dashboard and REST API for managing a simple e-commerce store. Bu
 - Backend: FastAPI (Python) + MySQL
 - Frontend: React (Create React App)
 - Authentication: hashed passwords with passlib/bcrypt
-This README contains everything a developer needs to get the project running locally, how the code is organized, API examples, deployment notes, and troubleshooting tips.
 
 Table of contents
 
@@ -31,7 +30,7 @@ Table of contents
 Project status
 
 - Status: Final project / learning demo
-- Not production-ready: contains simplified auth and direct DB access patterns. Review and harden before public deployment.
+- Not production-ready: contains simplified auth and direct DB access patterns.
 
 Quick start (local)
 
