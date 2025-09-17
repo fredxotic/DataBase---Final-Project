@@ -66,43 +66,127 @@ pip install -r requirements.txt
 # Run migrations / create schema (SQL file provided)
 # Import using mysql client or a GUI tool:
 # mysql -u <user> -p < database < ecommerce_store.sql
+ # 🛒 E-Commerce Management System
 
-# Start FastAPI (development)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](#)
+[![React](https://img.shields.io/badge/React-19.1.1-blue.svg)](#)
+
+A one-stop admin dashboard and REST API for managing a simple e-commerce store. Built with FastAPI (Python) for the backend and React (Create React App) for the frontend. This README contains setup, development, and troubleshooting instructions.
+
+---
+
+## Table of contents
+
+- [Project overview](#project-overview)
+- [Quick start (local)](#quick-start-local)
+- [Backend (FastAPI)](#backend-fastapi)
+  - [Prerequisites](#prerequisites)
+  - [Environment](#environment)
+  - [Install & run](#install--run)
+  - [Database setup](#database-setup)
+  - [API overview](#api-overview)
+- [Frontend (React)](#frontend-react)
+  - [Install & run](#install--run-1)
+  - [Build for production](#build-for-production)
+- [Development notes](#development-notes)
+- [Troubleshooting](#troubleshooting)
+- [Security notes](#security-notes)
+- [Contribution & License](#contribution--license)
+- [Recommended next steps](#recommended-next-steps)
+- [Contact](#contact)
+
+---
+
+## Project overview
+
+A modern full-stack e-commerce admin and API for managing users, products, and categories. The repo includes:
+
+- `backend/` — FastAPI application, SQL schema, and Python dependencies
+- `frontend/` — React admin dashboard built with Create React App
+
+This project was created as a final academic assignment / demo and is intended for learning and local development.
+
+## Quick start (local)
+
+1. Clone the repository
+
+```bash
+git clone https://github.com/fredxotic/DataBase---Final-Project.git
+cd "DataBase - FinalProject"
+```
+
+2. Start the backend and frontend (instructions below)
+
+---
+
+## Backend (FastAPI)
+
+### Prerequisites
+
+- Python 3.9+
+- MySQL server (local or remote)
+
+### Environment
+
+Copy the environment template and fill in your DB credentials:
+
+```bash
+cd backend
+cp .env.example .env
+# Edit .env and set DB_HOST, DB_PORT (default 3306), DB_USER, DB_PASSWORD, DB_NAME
+```
+
+### Install & run
+
+Create and activate a virtual environment, then install dependencies:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+If `pip` fails due to a typo in `requirements.txt` (see Troubleshooting), install `python-dotenv` manually:
+
+```bash
+pip install python-dotenv
+```
+
+Import the database schema and run the app:
+
+```bash
+# import schema into MySQL (replace placeholders)
+# mysql -u <user> -p < database < ecommerce_store.sql
+
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Notes
+### Database setup
 
-- `backend/requirements.txt` pins versions used during development (FastAPI, Uvicorn, mysql-connector-python, python-dotenv, pydantic, passlib, bcrypt).
-- If using a different MySQL driver (e.g. PyMySQL or SQLAlchemy), update the code accordingly.
+The SQL schema is available at `backend/ecommerce_store.sql`. Use `mysql` CLI or your preferred GUI to import this file into a MySQL database referenced by your `.env`.
 
-Database schema
-
-- The SQL schema is provided at `backend/ecommerce_store.sql` — import it into your MySQL server to create tables and sample data.
-
-API overview
+### API overview
 
 - Base URL (development): `http://localhost:8000`
-- Interactive docs (Swagger): `http://localhost:8000/docs`
-- Common endpoints (examples — check `backend/main.py` for exact routes):
-      - `GET /products` — list products
-      - `GET /products/{id}` — get product
-      - `POST /products` — create product
-      - `PUT /products/{id}` — update product
-      - `DELETE /products/{id}` — delete product
-      - `GET /users`, `POST /users`, `PUT /users/{id}` — user CRUD
+- Swagger UI: `http://localhost:8000/docs`
 
-Authentication
+Common endpoints (verify exact routes in `backend/main.py`):
 
-- Passwords are hashed using `passlib`/`bcrypt` (see backend code). The project contains basic auth flows suitable for demos. For production, switch to token-based auth (JWT/OAuth2) and HTTPS.
+- `GET /products` — list products
+- `GET /products/{id}` — get product
+- `POST /products` — create product
+- `PUT /products/{id}` — update product
+- `DELETE /products/{id}` — delete product
+- `GET /users`, `POST /users`, `PUT /users/{id}` — user CRUD
 
-Frontend (React)
+Authentication: passwords are hashed with `passlib`/`bcrypt`. For production, replace with token-based auth (JWT/OAuth2) and serve via HTTPS.
 
-Prerequisites
+---
 
-- Node.js 14+ (the package.json lists dependencies compatible with CRA and React 19)
+## Frontend (React)
 
-Install & run (development)
+### Install & run
 
 ```bash
 cd frontend
@@ -110,161 +194,75 @@ npm install
 npm start
 ```
 
-- The dev server runs on `http://localhost:3000` by default and should proxy or call the API at `http://localhost:8000` depending on the frontend configuration.
+The dev server runs at `http://localhost:3000` and should call the backend API at `http://localhost:8000` depending on frontend service configuration.
 
-Build for production
+### Build for production
 
 ```bash
 cd frontend
 npm run build
-# build artifacts will be in frontend/build
+# artifacts -> frontend/build
 ```
 
-Development notes
+---
 
-- File structure (high-level)
+## Development notes
+
+- High-level structure:
   - `backend/` — FastAPI app and SQL schema
-  - `frontend/src/` — React app with components, pages, and service helpers
+  - `frontend/src/` — React components, pages, and services
 
-- Helpful scripts
+- Helpful scripts:
   - Backend: `uvicorn main:app --reload`
   - Frontend: `npm start`, `npm run build`
 
-Testing
+- Testing:
+  - Frontend: Run `cd frontend && npm test` (CRA test runner)
+  - Backend: Add `pytest` tests under `backend/tests/` and run `pytest` after installing test dependencies
 
-- Frontend: CRA test runner exists; run `cd frontend && npm test`.
-- Backend: add pytest-based tests into `backend/tests/` and run `pytest` from the repo root after installing test dependencies.
+- Linting & formatting: Consider adding `black`, `ruff` for Python and `prettier`, `eslint` for JS.
 
-Linting & formatting
+---
 
-- Add `black`/`ruff` for Python and `prettier`/`eslint` for JS if you want consistent formatting (not included by default).
+## Troubleshooting
 
-Troubleshooting
+- pip install fails:
+  - Ensure virtualenv is activated.
+  - If you see an error related to `python-dotenv==1.0.0s`, that's a typo in `backend/requirements.txt`. Update the file to `python-dotenv==1.0.0` or install `python-dotenv` manually.
 
-- Issue: `pip install -r requirements.txt` fails
-    - Double-check you activated the virtualenv.
-    - The `requirements.txt` contains `python-dotenv==1.0.0s` — that looks like a typo. If pip errors, open `backend/requirements.txt` and change `python-dotenv==1.0.0s` to `python-dotenv==1.0.0` or run `pip install python-dotenv` separately.
+- MySQL connection refused:
+  - Confirm MySQL server is running and credentials in `.env` are correct.
+  - Check `DB_HOST` and `DB_PORT` (default 3306).
 
-- Issue: MySQL connection refused
-    - Confirm MySQL server is running and credentials in `.env` are correct.
-    - Check `DB_HOST`, `DB_PORT` (default 3306), `DB_USER`, `DB_PASSWORD`, `DB_NAME`.
+- Frontend cannot reach backend:
+  - Ensure backend is running on `localhost:8000` and that CORS is enabled in FastAPI.
 
-- Issue: Frontend can't reach backend
-    - Ensure backend is running on `localhost:8000` and CORS is enabled in the FastAPI app (see `main.py`).
+---
 
-Security notes
-- Do not commit `.env` files containing production credentials.
-- Use HTTPS and a proper secret management process in production.
-- Replace demo auth with OAuth2/JWT flow and salted password hashing best practices before deploying publicly.
+## Security notes
 
-Contribution & License
-- This repository was created as a final project / learning assignment. Contributions are welcome for learning purposes, but please open issues or PRs and allow maintainers to review.
+- Never commit `.env` with real credentials.
+- Use HTTPS and secret management in production.
+- Replace demo auth with a production-ready auth flow before exposing services publicly.
 
-License
-- MIT License — see `LICENSE` file if present.
+---
 
-Recommended next steps (optional improvements)
-- Add unit and integration tests for backend routes (pytest + testcontainers/mysql).
-- Add Dockerfiles for backend and frontend and a `docker-compose.yml` that brings up MySQL, backend, and frontend for easy local development.
-- Add CI (GitHub Actions) for tests and linting.
+## Contribution & License
 
-Acknowledgements
-- Built as an academic final project combining FastAPI and React.
+This repository is a final project / learning demo. Contributions are welcome for learning purposes — open an issue or PR and wait for maintainer review.
 
-Contact
-- Project owner: fredxotic (GitHub)
-# 🛒 E-Commerce Management System
+Licensed under MIT (see `LICENSE` if present).
 
-A modern, full-stack e-commerce solution built with FastAPI (Python), React, and MySQL. This project features a robust backend API and a responsive admin dashboard for managing all store data.
+---
 
-🚀 Features
-FastAPI Backend: A secure and efficient RESTful API.
+## Recommended next steps
 
-User Management: Full CRUD operations for user data.
+- Fix the `python-dotenv` typo in `backend/requirements.txt`.
+- Add Dockerfiles and `docker-compose.yml` to orchestrate MySQL + backend + frontend for local dev.
+- Add backend unit/integration tests and CI (GitHub Actions).
 
-Product & Category Management: Dynamic CRUD operations for products and their categories.
+---
 
-Password Hashing: Secure storage of user credentials using passlib.
+## Contact
 
-React Admin Dashboard: A clean and user-friendly interface.
-
-Intuitive UI: Easily manage products, users, and categories from a single dashboard.
-
-Real-time Interaction: Seamlessly connects with the backend API to reflect changes instantly.
-
-Clean Design: A minimal and responsive layout for a great user experience.
-
-💻 Tech Stack
-Backend
-
-Frontend
-
-Database
-
-
-
-
-
-
-
-Python 3.9+
-
-Node.js 14+
-
-
-
-📁 Project Structure
-/
-├── backend/                   # FastAPI backend application
-│   ├── main.py               # Core API logic and endpoints
-│   ├── ecommerce_store.sql   # SQL schema for the database
-│   ├── requirements.txt      # Python dependencies
-│   └── .env.example          # Template for environment variables
-│
-└── frontend/                  # React admin dashboard
-    ├── src/                   # React source files
-    │   ├── components/
-    │   └── pages/
-    ├── package.json
-    └── README.md
-
-🚀 Quick Start Guide
-Follow these simple steps to get the application running on your local machine.
-
-1. Backend Setup
-Navigate to the backend folder:
-
-cd backend
-
-Install Python dependencies:
-
-pip install -r requirements.txt
-
-Set up your MySQL database and create a new database with the schema provided in ecommerce_store.sql.
-
-Create a .env file from the .env.example template and add your database credentials.
-
-Run the FastAPI server:
-
-uvicorn main:app --reload
-
-2. Frontend Setup
-Open a new terminal and navigate to the frontend folder:
-
-cd frontend
-
-Install Node.js dependencies:
-
-npm install
-
-Run the React app:
-
-npm start
-
-With both servers running, the React application at http://localhost:3000 will automatically connect to your API at http://localhost:8000.
-
-🤝 Contributing & Support
-This project is a final assignment and is not actively seeking contributions. For any questions, please reach out to the project owner.
-
-📄 License
-This project is licensed under the MIT License.
+Project owner: `fredxotic` (GitHub)
