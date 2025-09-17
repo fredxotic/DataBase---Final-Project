@@ -74,7 +74,7 @@ A modern full-stack e-commerce admin and API for managing users, products, and c
 - `backend/` — FastAPI application, SQL schema, and Python dependencies
 - `frontend/` — React admin dashboard built with Create React App
 
-This project was created as a final academic assignment / demo and is intended for learning and local development.
+This project was created as a final academic assignment and is intended for learning and local development.
 
 ## Quick start (local)
 
