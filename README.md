@@ -66,37 +66,6 @@ pip install -r requirements.txt
 # Run migrations / create schema (SQL file provided)
 # Import using mysql client or a GUI tool:
 # mysql -u <user> -p < database < ecommerce_store.sql
- # 🛒 E-Commerce Management System
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](#)
-[![React](https://img.shields.io/badge/React-19.1.1-blue.svg)](#)
-
-A one-stop admin dashboard and REST API for managing a simple e-commerce store. Built with FastAPI (Python) for the backend and React (Create React App) for the frontend. This README contains setup, development, and troubleshooting instructions.
-
----
-
-## Table of contents
-
-- [Project overview](#project-overview)
-- [Quick start (local)](#quick-start-local)
-- [Backend (FastAPI)](#backend-fastapi)
-  - [Prerequisites](#prerequisites)
-  - [Environment](#environment)
-  - [Install & run](#install--run)
-  - [Database setup](#database-setup)
-  - [API overview](#api-overview)
-- [Frontend (React)](#frontend-react)
-  - [Install & run](#install--run-1)
-  - [Build for production](#build-for-production)
-- [Development notes](#development-notes)
-- [Troubleshooting](#troubleshooting)
-- [Security notes](#security-notes)
-- [Contribution & License](#contribution--license)
-- [Recommended next steps](#recommended-next-steps)
-- [Contact](#contact)
-
----
 
 ## Project overview
 
